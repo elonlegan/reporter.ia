@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
-import { GameId, Review } from './types';
+import { Article } from './types';
 import { OpenAIStream, StreamingTextResponse } from 'ai'; // Vercel AI SDK ***
-import { log } from 'console';
+import { title } from 'process';
+import { getCountryInfo } from './utils';
 
 if (!process.env.PERPLEXITY_API_KEY) {
 	throw new Error(
@@ -25,47 +26,20 @@ function buildPrompt(
 	];
 }
 
-export async function summarizeReviews(gameId: GameId) {
-	const metaCriticURL = `https://newsapi.org/v2/everything?q=tesla&from=2024-07-01&language=es&apiKey=${process.env.NEWS_API_KEY}
-`;
+export async function summarizeNews(news: Article[]) {
+	const { languages } = await getCountryInfo();
+	const prompt = `Escribe un resumen/reportaje de las noticias en ${languages}.
 
-	const res = await fetch(metaCriticURL);
-	const data = await res.json();
-	console.log(data);
-
-	const { components } = data;
-	const [rawInfo, _, rawReviews] = components;
-
-	const {
-		data: {
-			item: { criticScoreSummary, title },
-		},
-	} = rawInfo;
-	const { score } = criticScoreSummary;
-
-	const {
-		data: { items },
-	} = rawReviews;
-
-	const prompt = `Escribe un resumen de las valoraciones de usuarios del videojuego ${title} en español. La puntuación es ${score} de 100.
-
-  Usa este tono según la puntuación del videojuego:
-  - De 0 a 40: negativo
-  - De 41 a 60: neutral
-  - De 61 a 80: positivo
-  - De 81 a 100: muy positivo
-
-  Recibirás una lista de valoraciones de usuarios en diferentes idiomas pero tu resumen debe estar en español.
-  Tu objetivo es resaltar los temas más comunes y las emociones expresaddas por los usuarios.
+  Recibirás una lista de noticas en diferentes idiomas pero tu resumen debe estar en ${languages}.
+  Tu objetivo es resaltar los temas más importantes para tener un conocimiento general de lo que esta pasando en el mundo.
   Si hay varios temas, intenta capturar los más importantes.
   Divídela en 4 párrafos cortos. Máximo 30 palabras en total.
-  No vuelvas a repetir la puntuación.
-  No hagas referencias a puntuaciones concretas ni a la fecha de la valoración.
 
-  Estas son las valoraciones de los usuarios:
-  ${items.map((item: Review) => item.quote).join('\n')}
+  Estas son las noticias:
+  ${news
+		.map((article: Article) => article.content)
+		.join('\n')}
   `;
-	console.log(prompt);
 
 	const query = {
 		model: 'llama-3-sonar-large-32k-chat',

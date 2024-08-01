@@ -1,8 +1,8 @@
-import { Reviews } from "@/components/reviews";
-import { getGame } from "@/lib/data";
+import { News } from '@/components/news';
+import { getData } from '@/lib/data';
 
 export default async function Home() {
-  const game = await getGame("the-last-of-us-part-ii-remastered"); 
+	const { summary, news } = await getData();
 
-  return <Reviews game={game} />;
+	return <News summary={summary} news={news} />;
 }
