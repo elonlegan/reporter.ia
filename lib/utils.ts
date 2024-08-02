@@ -12,9 +12,11 @@ export async function getCountryInfo() {
 
 		const { data } = await axios.get(ipApiURL);
 
+		data.language = data.languages.split('-')[0];
+
 		return data;
 	} catch (error: any) {
 		console.log(error);
-		throw new Error(error);
+		return { language: 'es' };
 	}
 }

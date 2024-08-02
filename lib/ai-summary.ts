@@ -3,6 +3,8 @@ import { Article } from './types';
 import { OpenAIStream, StreamingTextResponse } from 'ai'; // Vercel AI SDK ***
 import { title } from 'process';
 import { getCountryInfo } from './utils';
+import { ArticleCard } from '@/components/news';
+import { readFile } from 'fs';
 
 if (!process.env.PERPLEXITY_API_KEY) {
 	throw new Error(
@@ -27,19 +29,16 @@ function buildPrompt(
 }
 
 export async function summarizeNews(news: Article[]) {
-	const { languages } = await getCountryInfo();
-	const prompt = `Escribe un resumen/reportaje de las noticias en ${languages}.
+	const { language, ...ipInfo } = await getCountryInfo();
 
-  Recibirás una lista de noticas en diferentes idiomas pero tu resumen debe estar en ${languages}.
+	const prompt = `Escribe un resumen de las noticias en ${language}.
+
+  Recibirás una lista de noticas y sus detalles.
   Tu objetivo es resaltar los temas más importantes para tener un conocimiento general de lo que esta pasando en el mundo.
   Si hay varios temas, intenta capturar los más importantes.
-  Divídela en 4 párrafos cortos. Máximo 30 palabras en total.
 
   Estas son las noticias:
-  ${news
-		.map((article: Article) => article.content)
-		.join('\n')}
-  `;
+  ${news.map(structureArticleData).join('\n')}`;
 
 	const query = {
 		model: 'llama-3-sonar-large-32k-chat',
@@ -60,4 +59,17 @@ export async function summarizeNews(news: Article[]) {
 		stream
 	);
 	return await streamingResponse.text();
+	// return await prompt;
+}
+
+function structureArticleData(article: Article) {
+	return `
+	Título: ${article.title}
+	Fecha de publicacion: ${new Date(
+		article.publishedAt
+	).toLocaleString()}
+	Fuente: ${article.source.name}
+	Autor: ${article.author}
+	contenido: ${article.content}
+	`;
 }
