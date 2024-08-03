@@ -1,11 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import {
+	useSearchParams,
+	useRouter,
+} from 'next/navigation';
 
 export function SearchInput() {
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const handleKeyPress = (e) => {
+		console.log(searchParams.get('search'));
 
 		if (e.key === 'Enter') {
 			e.preventDefault();
@@ -14,7 +19,7 @@ export function SearchInput() {
 	};
 
 	const search = (searchValue: string) => {
-		router.push(searchValue);
+		router.push(`?search=${searchValue}`);
 	};
 
 	return (
@@ -40,6 +45,7 @@ export function SearchInput() {
 					id='default-search'
 					className='block w-full p-4 ps-10 m-0 text-sm  rounded-none border-4 border-current ring-inset focus:ring-black bg-transparent'
 					placeholder='Search'
+					defaultValue={searchParams.get('search') || ''}
 					onKeyDown={handleKeyPress}
 				/>
 			</div>
