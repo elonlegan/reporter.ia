@@ -1,6 +1,22 @@
-import Link from 'next/link';
+'use client';
+
+import { useRouter } from 'next/navigation';
 
 export function SearchInput() {
+	const router = useRouter();
+
+	const handleKeyPress = (e) => {
+
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			search(e.target.value);
+		}
+	};
+
+	const search = (searchValue: string) => {
+		router.push(searchValue);
+	};
+
 	return (
 		<form className='lg:w-1/4 w-full'>
 			<div className='relative'>
@@ -22,9 +38,9 @@ export function SearchInput() {
 				<input
 					type='search'
 					id='default-search'
-					className='block w-full p-4 ps-10 m-0 text-sm  rounded-none border-4 border-current
-					ring-inset focus:ring-black bg-transparent'
+					className='block w-full p-4 ps-10 m-0 text-sm  rounded-none border-4 border-current ring-inset focus:ring-black bg-transparent'
 					placeholder='Search'
+					onKeyDown={handleKeyPress}
 				/>
 			</div>
 		</form>

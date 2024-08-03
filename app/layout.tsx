@@ -21,7 +21,7 @@ export default function RootLayout({
 			<body className={(inter.className, 'bg-[#f8f3eb]')}>
 				<Container>
 					<Header />
-					<main className='pt-6'>{children}</main>
+					<main>{children}</main>
 				</Container>
 			</body>
 		</html>
