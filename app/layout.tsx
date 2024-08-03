@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Crimson_Pro } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
-
+import { Header } from '@/components/header/header';
+import { Container } from '@/components/container/container';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -17,13 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='es'>
-			<body className={inter.className}>
-				<nav className='flex justify-around py-4 border-b mb-8'>
-					<Link className='text-lg font-semibold' href='/'>
-						gameName
-					</Link>
-				</nav>
-				<main className='pt-6'>{children}</main>
+			<body className={(inter.className, 'bg-[#f8f3eb]')}>
+				<Container>
+					<Header />
+					<main className='pt-6'>{children}</main>
+				</Container>
 			</body>
 		</html>
 	);

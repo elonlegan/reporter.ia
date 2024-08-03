@@ -7,7 +7,7 @@ export async function getData(
 ): Promise<Data> {
 	const news = await getNews(search);
 
-	const summary = await summarizeNews(news);
+	// const summary = await summarizeNews(news);
 
-	return { summary, news };
+	return { summary: 'summary', news };
 }

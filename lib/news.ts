@@ -17,7 +17,8 @@ export async function getNews(
 			q: search,
 			sources: newsSources.join(','),
 			apiKey: process.env.NEWS_API_KEY,
-			pageSize: 6,
+			// pageSize: 6,
+			pageSize: 1,
 		};
 
 		const {
@@ -33,7 +34,7 @@ export async function getNews(
 		return news;
 	} catch (error: any) {
 		console.log(error);
-		throw new Error(error);
+		return [];
 	}
 }
 
@@ -84,6 +85,6 @@ export async function getContentFromNews(
 		};
 	} catch (error: any) {
 		console.log(error);
-		throw new Error(error);
+		return article;
 	}
 }
