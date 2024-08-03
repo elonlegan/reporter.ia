@@ -1,8 +1,3 @@
-import {
-	AvatarImage,
-	AvatarFallback,
-	Avatar,
-} from '@/components/ui/avatar';
 import { Article, Data } from '@/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
