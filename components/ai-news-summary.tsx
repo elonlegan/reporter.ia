@@ -1,4 +1,4 @@
-export async function AINewsSummary({
+export function AINewsSummary({
 	summary,
 }: {
 	summary: string;

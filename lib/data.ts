@@ -5,6 +5,8 @@ import { Data } from './types';
 export async function getData(
 	search?: string
 ): Promise<Data> {
+	console.log('search', search);
+
 	// const news = await getNews(search);
 
 	// const summary = await summarizeNews(news);

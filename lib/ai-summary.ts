@@ -1,10 +1,7 @@
 import OpenAI from 'openai';
 import { Article } from './types';
 import { OpenAIStream, StreamingTextResponse } from 'ai'; // Vercel AI SDK ***
-import { title } from 'process';
 import { getCountryInfo } from './utils';
-import { ArticleCard } from '@/components/news';
-import { readFile } from 'fs';
 
 if (!process.env.PERPLEXITY_API_KEY) {
 	throw new Error(

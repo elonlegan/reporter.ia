@@ -2,7 +2,7 @@ import { Article, Data } from '@/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
 
-export async function News({ summary, news }: Data) {
+export function News({ summary, news }: Data) {
 	return (
 		<div className='grid grid-cols-12 grid-rows-12 gap-4 pt-6'>
 			<AINewsSummary summary={summary} />
