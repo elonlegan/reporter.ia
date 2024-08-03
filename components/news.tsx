@@ -9,7 +9,7 @@ import { AINewsSummary } from './ai-news-summary';
 
 export async function News({ summary, news }: Data) {
 	return (
-		<div className='mx-auto px-4 md:px-6 max-w-2xl grid gap-12'>
+		<div className='grid grid-cols-12 gap-4'>
 			<AINewsSummary summary={summary} />
 			{news?.map((article) => (
 				<ArticleCard
@@ -29,33 +29,24 @@ export function ArticleCard({
 	const date = new Date(article.publishedAt);
 
 	return (
-		<div className='flex gap-4'>
-			<Avatar className='w-10 h-10 border'>
-				<AvatarImage
-					alt='@shadcn'
-					src='/placeholder-user.jpg'
-				/>
-				<AvatarFallback>CN</AvatarFallback>
-			</Avatar>
-			<div className='grid gap-4'>
-				<div className='flex gap-4 items-start'>
-					<div className='grid gap-0.5 text-sm'>
-						<h3 className='font-semibold'>
-							{article.author}
-						</h3>
-						<time
-							className='text-sm text-gray-500 dark:text-gray-400'
-							suppressHydrationWarning
-						>
-							{timeAgo(date)}
-						</time>
-					</div>
-				</div>
-				<div className='text-sm leading-loose text-gray-500 dark:text-gray-400'>
-					<p>{article.description}</p>
-				</div>
-			</div>
-		</div>
+		<article className='border-b hover:shadow-md col-span-2 p-4 transition grayscale hover:grayscale-0'>
+			{article.urlToImage && (
+				<figure className=''>
+					<img
+						src={article.urlToImage}
+						alt={article.title + ' image'}
+					/>
+				</figure>
+			)}
+			<h3 className='text-xl font-bold'>{article.title}</h3>
+			<p>{article.description}</p>
+			<time
+				className='text-sm text-gray-500 dark:text-gray-400'
+				suppressHydrationWarning
+			>
+				{timeAgo(date)}
+			</time>
+		</article>
 	);
 }
 
