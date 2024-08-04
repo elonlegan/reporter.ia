@@ -33,10 +33,12 @@ export function ArticleCard({
 					/>
 				</figure>
 			)}
-			<h3 className='text-xl font-bold'>{article.title}</h3>
-			<p>{article.description}</p>
+			<h3 className='text-xl font-bold '>
+				{article.title}
+			</h3>
+			<p className='text-justify'>{article.description}</p>
 			<time
-				className='text-sm text-gray-500 dark:text-gray-400'
+				className='text-sm text-gray-600 dark:text-gray-400'
 				suppressHydrationWarning
 			>
 				{timeAgo(date)}
