@@ -6,6 +6,7 @@ import { Article } from '@/lib/types';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Loading } from '../components/loading/loading';
 
 export default function Home() {
 	const searchParams = useSearchParams();
@@ -23,13 +24,14 @@ export default function Home() {
 			})
 			.then((res) => res.data)
 			.then(({ summary, news }) => {
-				console.log(summary);
-				console.log(news);
-
 				setSummary(summary);
 				setNews(news);
 			});
 	}, [searchParams]);
 
-	return <News summary={summary} news={news} />;
+	return summary && news ? (
+		<News summary={summary} news={news} />
+	) : (
+		<Loading />
+	);
 }

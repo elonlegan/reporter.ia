@@ -62,7 +62,7 @@ export function ArticleCard({
 					</time>
 				</div>
 			</article>
-			<div className='bg-black w-full h-1 rounded my-3' />
+			<div className='bg-black w-full h-1 rounded my-3'></div>
 		</>
 	);
 }

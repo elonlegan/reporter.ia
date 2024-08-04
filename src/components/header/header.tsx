@@ -11,7 +11,7 @@ export function Header() {
 				REPORTER.IA
 			</Link>
 			<SearchInput />
-			<div className='bg-black w-full h-2 rounded ' />
+			<div className='bg-black w-full h-2 rounded '></div>
 		</nav>
 	);
 }
