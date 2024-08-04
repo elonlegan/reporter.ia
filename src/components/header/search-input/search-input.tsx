@@ -3,11 +3,13 @@
 import {
 	useSearchParams,
 	useRouter,
+	usePathname,
 } from 'next/navigation';
 
 export function SearchInput() {
-	const router = useRouter();
+	const { replace } = useRouter();
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
 
 	const handleKeyPress = (e) => {
 		if (e.key === 'Enter') {
@@ -16,10 +18,16 @@ export function SearchInput() {
 		}
 	};
 
-	const search = (searchValue: string) => {
+	const search = (term: string) => {
 		console.log('buscar');
+		const params = new URLSearchParams(searchParams);
+		if (term) {
+			params.set('search', term);
+		} else {
+			params.delete('search');
+		}
 
-		router.push(`?search=${searchValue}`);
+		replace(`${pathname}?${params.toString()}`);
 	};
 
 	return (
