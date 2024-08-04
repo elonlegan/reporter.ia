@@ -23,6 +23,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 				<div
 					role='status'
@@ -35,6 +36,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 				<div
 					role='status'
@@ -47,6 +49,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 				<div
 					role='status'
@@ -59,6 +62,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 				<div
 					role='status'
@@ -71,6 +75,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 				<div
 					role='status'
@@ -83,6 +88,7 @@ export function Loading() {
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5'></div>
 					<div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]'></div>
 					<span className='sr-only'>Loading...</span>
+					<div className='bg-black w-full h-1 rounded my-3'></div>
 				</div>
 			</Masonry>
 		</ResponsiveMasonry>

@@ -17,6 +17,8 @@ export function SearchInput() {
 	};
 
 	const search = (searchValue: string) => {
+		console.log('buscar');
+
 		router.push(`?search=${searchValue}`);
 	};
 

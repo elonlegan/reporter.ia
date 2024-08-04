@@ -1,3 +1,5 @@
+'use client';
+
 import { Article, Data } from '@/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
