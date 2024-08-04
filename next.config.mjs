@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+	experimental: {
+		serverComponentsExternalPackages: ['geoip-lite'],
+	},
+};
 
 export default nextConfig;

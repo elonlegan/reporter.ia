@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Article } from './types';
-import { getCountryInfo } from './utils';
+import { getPreferredLanguage } from './utils';
 import { extract } from '@extractus/article-extractor';
 
 export async function getNews(
@@ -41,7 +41,7 @@ export async function getSources(): Promise<string[]> {
 	try {
 		const newsApiURL = `https://newsapi.org/v2/top-headlines/sources`;
 
-		const { language } = await getCountryInfo();
+		const { code: language } = await getPreferredLanguage();
 
 		const params = {
 			language,

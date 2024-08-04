@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { Article } from './types';
 import { OpenAIStream, StreamingTextResponse } from 'ai'; // Vercel AI SDK ***
-import { getCountryInfo } from './utils';
+import { getPreferredLanguage } from './utils';
 
 if (!process.env.PERPLEXITY_API_KEY) {
 	throw new Error(
@@ -26,13 +26,14 @@ function buildPrompt(
 }
 
 export async function summarizeNews(news: Article[]) {
-	const { language, ...ipInfo } = await getCountryInfo();
+	const { name: language } = await getPreferredLanguage();
 
-	const prompt = `Escribe un resumen de las noticias en ${language}.
+	const prompt = `Como si fueras un periodias hablante ${language} Escribe un resumen de las noticias.
 
   Recibirás una lista de noticas y sus detalles.
   Tu objetivo es resaltar los temas más importantes para tener un conocimiento general de lo que esta pasando en el mundo.
   Si hay varios temas, intenta capturar los más importantes.
+	entrega el resumen de la noticia en ${language}
 
   Estas son las noticias:
   ${news.map(structureArticleData).join('\n')}`;
