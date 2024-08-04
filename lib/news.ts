@@ -17,8 +17,7 @@ export async function getNews(
 			q: search,
 			sources: newsSources.join(','),
 			apiKey: process.env.NEWS_API_KEY,
-			// pageSize: 6,
-			pageSize: 1,
+			pageSize: 8,
 		};
 
 		const {
