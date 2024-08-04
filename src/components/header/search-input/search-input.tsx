@@ -41,7 +41,7 @@ export function SearchInput() {
 				<input
 					type='search'
 					id='default-search'
-					className='block w-full p-4 ps-10 m-0 text-sm  rounded-none border-4 border-current ring-inset focus:ring-black bg-transparent'
+					className='block w-full p-2 ps-10 m-0 text-sm rounded border-4 border-current ring-inset focus:ring-black bg-transparent'
 					placeholder='Search'
 					defaultValue={searchParams?.get('search') || ''}
 					onKeyDown={handleKeyPress}

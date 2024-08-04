@@ -38,7 +38,7 @@ export function ArticleCard({
 			</h3>
 			<p className='text-justify'>{article.description}</p>
 			<time
-				className='text-sm text-gray-600 dark:text-gray-400'
+				className='text-sm text-gray-600 '
 				suppressHydrationWarning
 			>
 				{timeAgo(date)}
