@@ -1,6 +1,6 @@
 'use client';
 
-import { News } from '@/components/news';
+import { News } from '@/src/components/news';
 import { getData } from '@/lib/data';
 import { Article } from '@/lib/types';
 import axios from 'axios';

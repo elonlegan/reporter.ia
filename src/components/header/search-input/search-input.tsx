@@ -10,8 +10,6 @@ export function SearchInput() {
 	const searchParams = useSearchParams();
 
 	const handleKeyPress = (e) => {
-		console.log(searchParams.get('search'));
-
 		if (e.key === 'Enter') {
 			e.preventDefault();
 			search(e.target.value);
@@ -45,7 +43,7 @@ export function SearchInput() {
 					id='default-search'
 					className='block w-full p-4 ps-10 m-0 text-sm  rounded-none border-4 border-current ring-inset focus:ring-black bg-transparent'
 					placeholder='Search'
-					defaultValue={searchParams.get('search') || ''}
+					defaultValue={searchParams?.get('search') || ''}
 					onKeyDown={handleKeyPress}
 				/>
 			</div>

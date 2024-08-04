@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter, Crimson_Pro } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
-import { Header } from '@/components/header/header';
-import { Container } from '@/components/container/container';
+import { Header } from '@/src/components/header/header';
+import { Container } from '@/src/components/container/container';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
