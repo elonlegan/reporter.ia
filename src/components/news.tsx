@@ -3,31 +3,16 @@
 import { Article, Data } from '@/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
-import Masonry, {
-	ResponsiveMasonry,
-} from 'react-responsive-masonry';
+import { MasonryLayout } from './masonry-layout/masonry-layout';
 
 export function News({ summary, news }: Data) {
 	return (
-		<div className='pt-6'>
-			<ResponsiveMasonry
-				columnsCountBreakPoints={{
-					350: 1,
-					750: 2,
-					900: 4,
-				}}
-			>
-				<Masonry gutter='0.75rem'>
-					<AINewsSummary summary={summary} />
-					{news?.map((article) => (
-						<ArticleCard
-							key={article.source.id + article.url}
-							article={article}
-						/>
-					))}
-				</Masonry>
-			</ResponsiveMasonry>
-		</div>
+		<MasonryLayout>
+			<AINewsSummary summary={summary} />
+			{news?.map((article, index) => (
+				<ArticleCard key={index} article={article} />
+			))}
+		</MasonryLayout>
 	);
 }
 
@@ -42,15 +27,16 @@ export function ArticleCard({
 		<>
 			<article className=' hover:shadow-md col-span-2  transition grayscale hover:grayscale-0'>
 				{article.urlToImage && (
-					<figure className=''>
+					<figure>
 						<img
 							src={article.urlToImage}
 							alt={article.title + ' image'}
+							suppressHydrationWarning
 						/>
 					</figure>
 				)}
 				<div className='p-2'>
-					<h3 className='text-xl font-bold '>
+					<h3 className='text-xl font-bold mb-2'>
 						{article.title}
 					</h3>
 					<p className='text-justify'>

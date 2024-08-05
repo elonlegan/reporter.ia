@@ -26,38 +26,41 @@ function buildPrompt(
 }
 
 export async function summarizeNews(news: Article[]) {
-	const { name: language } = await getPreferredLanguage();
+	try {
+		const { name: language } = await getPreferredLanguage();
 
-	const prompt = `Como si fueras un periodias hablante ${language} Escribe un resumen de las noticias.
+		const prompt = `Como si fueras un periodias hablante ${language} Escribe un resumen de las noticias.
+	
+		Recibirás una lista de noticas y sus detalles.
+		Tu objetivo es resaltar los temas más importantes para tener un conocimiento general de lo que esta pasando en el mundo.
+		Si hay varios temas, intenta capturar los más importantes.
+		entrega el resumen de la noticia en ${language}
+	
+		Estas son las noticias:
+		${news.map(structureArticleData).join('\n')}`;
 
-  Recibirás una lista de noticas y sus detalles.
-  Tu objetivo es resaltar los temas más importantes para tener un conocimiento general de lo que esta pasando en el mundo.
-  Si hay varios temas, intenta capturar los más importantes.
-	entrega el resumen de la noticia en ${language}
+		const query = {
+			model: 'llama-3-sonar-large-32k-chat',
+			stream: true,
+			messages: buildPrompt(prompt),
+			max_tokens: 1000,
+			temperature: 0.75,
+			frequency_penalty: 1,
+		} as const;
 
-  Estas son las noticias:
-  ${news.map(structureArticleData).join('\n')}`;
+		const response =
+			await perplexity.chat.completions.create(query);
 
-	const query = {
-		model: 'llama-3-sonar-large-32k-chat',
-		stream: true,
-		messages: buildPrompt(prompt),
-		max_tokens: 1000,
-		temperature: 0.75,
-		frequency_penalty: 1,
-	} as const;
+		const stream = OpenAIStream(response);
 
-	const response = await perplexity.chat.completions.create(
-		query
-	);
-
-	const stream = OpenAIStream(response);
-
-	const streamingResponse = new StreamingTextResponse(
-		stream
-	);
-	return await streamingResponse.text();
-	// return await prompt;
+		const streamingResponse = new StreamingTextResponse(
+			stream
+		);
+		return await streamingResponse.text();
+	} catch (error) {
+		console.log(error);
+		return 'Summary error please try again';
+	}
 }
 
 function structureArticleData(article: Article) {
