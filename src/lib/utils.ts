@@ -4,20 +4,18 @@ import { countryLanguageMap } from './country-language-map';
 import { log } from 'console';
 
 export function getPreferredLanguage() {
-	const defaultLanguage = { code: 'en', name: 'English' };
-	let ip = IP();
+	const defaultLanguage = { code: 'es', name: 'Spanish' };
+	// let ip = IP();
 
 	let preferredLanguage = defaultLanguage;
 
-	if (ip) {
-		const geo = geoip.lookup(ip);
-		if (geo && geo.country) {
-			preferredLanguage =
-				countryLanguageMap[geo.country] || defaultLanguage;
-		}
-	}
-	console.log(preferredLanguage);
-
+	// if (ip) {
+	// 	const geo = geoip.lookup(ip);
+	// 	if (geo && geo.country) {
+	// 		preferredLanguage =
+	// 			countryLanguageMap[geo.country] || defaultLanguage;
+	// 	}
+	// }
 	return preferredLanguage;
 }
 

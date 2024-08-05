@@ -48,7 +48,7 @@ export function SearchInput() {
 					type='search'
 					id='default-search'
 					className='block w-full p-2 ps-10 m-0 text-sm rounded border-4 border-current ring-inset focus:ring-black bg-transparent'
-					placeholder='Search'
+					placeholder='Buscar'
 					defaultValue={params?.search || ''}
 					onKeyDown={handleKeyPress}
 				/>
