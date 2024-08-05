@@ -1,16 +1,11 @@
 import { headers } from 'next/headers';
 import geoip from 'geoip-lite';
 import { countryLanguageMap } from './country-language-map';
+import { log } from 'console';
 
 export function getPreferredLanguage() {
 	const defaultLanguage = { code: 'en', name: 'English' };
-	const headersList = headers();
-	let ip =
-		headersList.get('x-forwarded-for') ||
-		headersList.get('remote-addr') ||
-		'127.0.0.1';
-	// Convert ::1 (IPv6 localhost) to 127.0.0.1 (IPv4 localhost)
-	ip = ip === '::1' ? '127.0.0.1' : ip;
+	let ip = IP();
 
 	let preferredLanguage = defaultLanguage;
 
@@ -21,6 +16,20 @@ export function getPreferredLanguage() {
 				countryLanguageMap[geo.country] || defaultLanguage;
 		}
 	}
+	console.log(preferredLanguage);
 
 	return preferredLanguage;
+}
+
+export function IP() {
+	const FALLBACK_IP_ADDRESS = '0.0.0.0';
+	const forwardedFor = headers().get('x-forwarded-for');
+
+	if (forwardedFor) {
+		return (
+			forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS
+		);
+	}
+
+	return headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS;
 }

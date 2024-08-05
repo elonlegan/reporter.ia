@@ -3,11 +3,13 @@ import { Article } from './types';
 import { getPreferredLanguage } from './utils';
 import { extract } from '@extractus/article-extractor';
 
+const newsApiBase = 'https://newsapi.org/v2';
+
 export async function getNews(
 	search?: string
 ): Promise<Article[]> {
 	try {
-		const newsApiURL = `https://newsapi.org/v2/top-headlines`;
+		const newsApiURL = `${newsApiBase}/top-headlines`;
 
 		const newsSources = await getSources();
 
@@ -39,9 +41,9 @@ export async function getNews(
 
 export async function getSources(): Promise<string[]> {
 	try {
-		const newsApiURL = `https://newsapi.org/v2/top-headlines/sources`;
+		const newsApiURL = `${newsApiBase}/top-headlines/sources`;
 
-		const { code: language } = getPreferredLanguage();
+		const { code: language } = await getPreferredLanguage();
 
 		const params = {
 			language,

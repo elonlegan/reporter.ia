@@ -27,7 +27,7 @@ function buildPrompt(
 
 export async function summarizeNews(news: Article[]) {
 	try {
-		const { name: language } = getPreferredLanguage();
+		const { name: language } = await getPreferredLanguage();
 
 		const prompt = `Como si fueras un periodias hablante ${language} Escribe un resumen de las noticias.
 	
