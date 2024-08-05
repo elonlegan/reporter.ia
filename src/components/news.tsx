@@ -1,6 +1,6 @@
 'use client';
 
-import { Article, Data } from '@/lib/types';
+import { Article, Data } from '@/src/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
 import { MasonryLayout } from './masonry-layout/masonry-layout';
@@ -24,7 +24,11 @@ export function ArticleCard({
 	const date = new Date(article.publishedAt);
 
 	return (
-		<>
+		<a
+			target='_blank'
+			href={article.url}
+			rel='noopener noreferrer'
+		>
 			<article className=' hover:shadow-md col-span-2  transition grayscale hover:grayscale-0'>
 				{article.urlToImage && (
 					<figure>
@@ -51,7 +55,7 @@ export function ArticleCard({
 				</div>
 			</article>
 			<div className='bg-black w-full h-1 rounded my-3'></div>
-		</>
+		</a>
 	);
 }
 

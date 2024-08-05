@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getData } from '@/lib/data';
-import { Data } from '@/lib/types';
+import { getData } from '@/src/lib/data';
+import { Data } from '@/src/lib/types';
 
 export default async function handler(
 	req: NextApiRequest,

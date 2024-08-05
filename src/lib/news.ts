@@ -41,7 +41,7 @@ export async function getSources(): Promise<string[]> {
 	try {
 		const newsApiURL = `https://newsapi.org/v2/top-headlines/sources`;
 
-		const { code: language } = await getPreferredLanguage();
+		const { code: language } = getPreferredLanguage();
 
 		const params = {
 			language,

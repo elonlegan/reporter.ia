@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import geoip from 'geoip-lite';
 import { countryLanguageMap } from './country-language-map';
 
-export async function getPreferredLanguage() {
+export function getPreferredLanguage() {
 	const defaultLanguage = { code: 'en', name: 'English' };
 	const headersList = headers();
 	let ip =

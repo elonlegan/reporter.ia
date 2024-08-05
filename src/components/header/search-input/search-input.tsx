@@ -1,15 +1,14 @@
 'use client';
 
 import {
-	useSearchParams,
+	useParams,
 	useRouter,
 	usePathname,
 } from 'next/navigation';
 
 export function SearchInput() {
-	const { replace } = useRouter();
-	const searchParams = useSearchParams();
-	const pathname = usePathname();
+	const router = useRouter();
+	const params = useParams();
 
 	const handleKeyPress = (e) => {
 		if (e.key === 'Enter') {
@@ -19,15 +18,12 @@ export function SearchInput() {
 	};
 
 	const search = (term: string) => {
-		console.log('buscar');
-		const params = new URLSearchParams(searchParams);
-		if (term) {
-			params.set('search', term);
-		} else {
-			params.delete('search');
+		if (!term) {
+			router.push(`/`);
+			return;
 		}
 
-		replace(`${pathname}?${params.toString()}`);
+		router.push(`/${term}`);
 	};
 
 	return (
@@ -53,7 +49,7 @@ export function SearchInput() {
 					id='default-search'
 					className='block w-full p-2 ps-10 m-0 text-sm rounded border-4 border-current ring-inset focus:ring-black bg-transparent'
 					placeholder='Search'
-					defaultValue={searchParams?.get('search') || ''}
+					defaultValue={params?.search || ''}
 					onKeyDown={handleKeyPress}
 				/>
 			</div>

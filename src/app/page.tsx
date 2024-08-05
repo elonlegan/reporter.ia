@@ -1,12 +1,7 @@
 import { News } from '@/src/components/news';
-import { getData } from '@/lib/data';
+import { getData } from '@/src/lib/data';
 
-export default async function Home({
-	params,
-	searchParams,
-}) {
-	const { summary, news } = await getData(
-		searchParams.search
-	);
+export default async function Home() {
+	const { summary, news } = await getData();
 	return <News summary={summary} news={news} />;
 }
