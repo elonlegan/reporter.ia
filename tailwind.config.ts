@@ -12,6 +12,9 @@ const config: Config = {
 				crimson: ['var(--font-crimsom)'],
 				lato: ['var(--font-lato)'],
 			},
+			colors: {
+				black: '#030301',
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate')],

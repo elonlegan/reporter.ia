@@ -29,7 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang='es'>
 			<body
-				className={`${lato.variable} ${crimsom.variable} font-lato bg-[#f8f3eb]`}
+				className={`${lato.variable} ${crimsom.variable} font-lato text-black bg-[#eeeeee]`}
 			>
 				<Container>
 					<Header />
