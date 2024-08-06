@@ -4,6 +4,7 @@ import { Article, Data } from '@/src/lib/types';
 import ms from 'ms';
 import { AINewsSummary } from './ai-news-summary';
 import { MasonryLayout } from './masonry-layout/masonry-layout';
+import Image from 'next/image';
 
 export function News({ summary, news }: Data) {
 	return (
@@ -32,10 +33,16 @@ export function ArticleCard({
 			<article className=' hover:shadow-md col-span-2  transition grayscale hover:grayscale-0'>
 				{article.urlToImage && (
 					<figure>
-						<img
+						<Image
+							loader={() => article.urlToImage}
 							src={article.urlToImage}
 							alt={article.title + ' image'}
-							suppressHydrationWarning
+							width={0}
+							height={0}
+							sizes='100vw'
+							style={{ width: '100%' }}
+							quality={75}
+							loading='lazy'
 						/>
 					</figure>
 				)}
